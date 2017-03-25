@@ -3,7 +3,7 @@ class FilmsController < ApplicationController
   before_action :find_film_and_check_permission, only: [:edit, :update, :destroy]
 
   def index
-    @films = Films.all
+    @films = Film.all
   end
 
   def show
