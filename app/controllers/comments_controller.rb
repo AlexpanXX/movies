@@ -1,9 +1,9 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_comment_and_check_permission, only: [:edit, :update, :destroy]
+  before_action :find_film_and_check_permission, only: [:new, :create]
 
   def new
-    @film = Film.find(params[:film_id])
     @comment = Comment.new
   end
 
@@ -12,7 +12,6 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @film = Film.find(params[:film_id])
     @comment = Comment.new(comment_params)
     @comment.film = @film
     @comment.user = current_user
@@ -42,6 +41,13 @@ class CommentsController < ApplicationController
   def find_comment_and_check_permission
     @comment = Comment.find(params[:id])
     if current_user != @comment.user
+      redirect_to root_path, alert: "You have no permission."
+    end
+  end
+
+  def find_film_and_check_permission
+    @film = Film.find(params[:film_id])
+    if !current_user.is_follower_of?(@film)
       redirect_to root_path, alert: "You have no permission."
     end
   end
