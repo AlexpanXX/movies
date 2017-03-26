@@ -18,9 +18,10 @@ class FilmsController < ApplicationController
   end
 
   def create
-    @film = Film.new(flim_params)
+    @film = Film.new(film_params)
+    @film.user = current_user
+    
     if @film.save
-      @film.user = current_user
       redirect_to films_path
     else
       render :new

@@ -6,22 +6,12 @@
         <th>#</th>
         <th>Title</th>
         <th>Description</th>
+        <th>Creator</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-      <% @films.each do |film| %>
-        <tr>
-          <td>#</td>
-          <td><%= film.title %></td>
-          <td><%= film.description %></td>
-          <td>
-            <%= link_to("Edit", edit_film_path(film), class: "btn btn-default btn-sm") %>
-            <%= link_to("Delete", film_path(film), class: "btn btn-default btn-sm",
-                          method: :delete, data: { confirm: "Are you sure?"}) %>
-          </td>
-        </tr>
-      <% end %>
+      <%= render partial: "film_item", collection: @films, as: :film %>
     </tbody>
   </table>
-</div>  
+</div>
