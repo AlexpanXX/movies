@@ -7,5 +7,11 @@ Rails.application.routes.draw do
     end
     resources :comments
   end
+
+  namespace :account do
+    resources :films
+    resources :comments
+  end
+  
   root "films#index"
 end

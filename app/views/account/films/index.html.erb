@@ -1,0 +1,25 @@
+<div class="col-md-12">
+  <h2 class="text-center"> 我收藏的电影 </h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Comment Count</th>
+        <th>Last Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @films.each do |film| %>
+        <tr>
+          <td>#</td>
+          <td><%= film.title %></td>
+          <td><%= film.created_at %></td>
+          <td><%= film.comments.count %></td>
+          <td><%= film.updated_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

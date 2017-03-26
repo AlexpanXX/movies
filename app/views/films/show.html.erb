@@ -1,19 +1,19 @@
 <div class="col-md-12">
   <div class="group">
-    <span class="pull-right">
-      <% if current_user && current_user.is_follower_of?(@film) %>
-        <label class="label label-success"> 已收藏 </label>
-        <%= link_to("Dislikes", dislikes_film_path(@film), class: "btn btn-default pull-right") %>
-      <% else %>
-        <label class="label label-warning"> 未收藏 </label>
-        <%= link_to("Favorite", favorite_film_path(@film), class: "btn btn-default pull-right") %>
-      <% end %>
-    </span>
     <% if current_user %>
-      <%= link_to("Write a Comment", new_film_comment_path(@film), class: "btn btn-default pull-right") %>
       <% if current_user == @film.user %>
         <%= link_to("Edit", edit_film_path(@film), class: "btn btn-primary pull-right") %>
       <% end %>
+      <%= link_to("Write a Comment", new_film_comment_path(@film), class: "btn btn-default pull-right") %>
+      <span class="pull-right">
+        <% if current_user.is_follower_of?(@film) %>
+          <label class="label label-success"> 已收藏 </label>
+          <%= link_to("Dislikes", dislikes_film_path(@film), class: "btn btn-default", method: :post) %>
+        <% else %>
+          <label class="label label-warning"> 未收藏 </label>
+          <%= link_to("Favorite", favorite_film_path(@film), class: "btn btn-default", method: :post) %>
+        <% end %>
+      </span>
     <% end %>
   </div>
 
@@ -43,7 +43,7 @@
   </table>
 
   <div class="text-center">
-    <%= will_paginate @commnets %>
+    <%= will_paginate @comments %>
   </div>
 
 </div>

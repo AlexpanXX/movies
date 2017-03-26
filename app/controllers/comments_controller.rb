@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.update(comment_params)
-      redirect_to film_path(@comment.film)
+      redirect_to account_comments_path, notice: "Update Success"
     else
       render :edit
     end
@@ -34,6 +34,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
+    redirect_to account_comments_path, alert: "Comment deleted"
   end
 
   private
