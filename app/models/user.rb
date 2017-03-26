@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :films
+  has_many :comments
   has_many :film_relationships
   has_many :favorited_films, through: :film_relationships, source: :film
 

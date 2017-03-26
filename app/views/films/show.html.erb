@@ -1,8 +1,36 @@
 <div class="col-md-12">
 
-  <%= link_to("Edit", edit_film_path(@film), class: "btn btn-primary pull-right") %>
+  <ul>
+    <% if current_user %>
+      <li><%= link_to("Write a Comment", new_film_comment_path(@film), class: "btn btn-default pull-right") %></li>
+      <% if current_user == @film.user %>
+        <li><%= link_to("Edit", edit_film_path(@film), class: "btn btn-primary pull-right") %></li>
+      <% end %>
+    <% end %>
+  </ul>
 
   <h2><%= @film.title %></h2>
   <p><%= @film.description %></p>
 
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>评论内容</th>
+        <th>发表者</th>
+        <th>发表时间</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @comments.each do |comment| %>
+        <tr>
+          <td>#</td>
+          <td><%= comment.content %></td>
+          <td><%= comment.user.email %></td>
+          <td><%= comment.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

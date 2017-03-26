@@ -8,6 +8,7 @@ class FilmsController < ApplicationController
 
   def show
     @film = Film.find(params[:id])
+    @comments = @film.comments
   end
 
   def new
@@ -20,7 +21,7 @@ class FilmsController < ApplicationController
   def create
     @film = Film.new(film_params)
     @film.user = current_user
-    
+
     if @film.save
       redirect_to films_path
     else
